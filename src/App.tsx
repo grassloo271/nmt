@@ -178,9 +178,6 @@ function AircraftView({
   const vertSpanWidth =
     Math.max(55, vertSpan * scale);
 
-  const tailDepth =
-    Math.max(12, tailChord * scale);
-
   return (
     
     <div className="aircraft-view">

@@ -144,9 +144,6 @@ function AircraftView({
   const tailSpan =
     result?.horizontal_tail?.span ?? 0.7;
 
-  const tailChord =
-    result?.horizontal_tail?.chord ?? 0.15;
-
   /*
    * Normalize the geometry so that the aircraft always
    * fits nicely inside the drawing area.

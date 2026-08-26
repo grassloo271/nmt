@@ -1,0 +1,752 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #18181b;
+  background: #f4f4f1;
+}
+
+body {
+  margin: 0;
+  min-width: 1100px;
+  background: #f4f4f1;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+
+/* ============================================================
+   APP
+   ============================================================ */
+
+.app {
+  min-height: 100vh;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.topbar {
+  height: 82px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 34px;
+
+  background: #ffffff;
+  border-bottom: 1px solid #deded9;
+}
+
+.eyebrow,
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #888883;
+}
+
+.topbar h1 {
+  margin: 3px 0 0;
+
+  font-size: 23px;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.topbar-right {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #999994;
+}
+
+
+/* ============================================================
+   MAIN LAYOUT
+   ============================================================ */
+
+.layout {
+  display: grid;
+
+  grid-template-columns:
+    255px
+    minmax(500px, 1fr)
+    335px;
+
+  min-height: calc(100vh - 82px);
+}
+
+
+/* ============================================================
+   LEFT CONTROLS
+   ============================================================ */
+
+.controls-panel {
+  padding: 28px 24px;
+
+  background: #fafaf8;
+
+  border-right: 1px solid #deded9;
+}
+
+.control {
+  margin-top: 30px;
+}
+
+.control-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  margin-bottom: 13px;
+
+  font-size: 13px;
+}
+
+.control-heading strong {
+  font-size: 17px;
+  font-weight: 650;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.control-heading small {
+  font-size: 11px;
+  color: #888;
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   SLIDERS
+   ============================================================ */
+
+input[type="range"] {
+  width: 100%;
+  height: 4px;
+
+  margin: 0;
+
+  appearance: none;
+
+  background: #d7d7d2;
+
+  border-radius: 999px;
+
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+
+  width: 17px;
+  height: 17px;
+
+  border-radius: 50%;
+
+  background: #18181b;
+
+  border: 3px solid #fafaf8;
+
+  box-shadow:
+    0 0 0 1px #18181b;
+
+  cursor: grab;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  background: #18181b;
+
+  border: 2px solid #fafaf8;
+
+  cursor: grab;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 7px;
+
+  font-size: 10px;
+  color: #999994;
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================
+   BUTTON
+   ============================================================ */
+
+.optimize-button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 34px;
+
+  padding: 13px 15px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #18181b;
+  color: white;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.12s ease,
+    background 0.12s ease;
+}
+
+.optimize-button:hover {
+  background: #303035;
+}
+
+.optimize-button:active {
+  transform: translateY(1px);
+}
+
+.optimize-button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.button-arrow {
+  font-size: 18px;
+  line-height: 10px;
+}
+
+
+/* ============================================================
+   INPUT SUMMARY
+   ============================================================ */
+
+.input-summary {
+  margin-top: 35px;
+
+  border-top: 1px solid #deded9;
+}
+
+.input-summary > div {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 11px 0;
+
+  border-bottom: 1px solid #deded9;
+
+  font-size: 11px;
+}
+
+.input-summary span {
+  color: #8a8a85;
+}
+
+.input-summary strong {
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+
+.error {
+  margin-top: 14px;
+
+  padding: 10px;
+
+  border-radius: 5px;
+
+  background: #fff0ef;
+  color: #ad3028;
+
+  font-size: 11px;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* ============================================================
+   AIRCRAFT AREA
+   ============================================================ */
+
+.aircraft-panel {
+  position: relative;
+
+  padding: 28px 32px;
+
+  background: #f8f8f5;
+}
+
+.aircraft-view {
+  position: relative;
+
+  width: 100%;
+  height: 510px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-label {
+  position: absolute;
+
+  top: 18px;
+  left: 0;
+
+  font-size: 9px;
+  letter-spacing: 0.14em;
+
+  color: #aaa9a3;
+}
+
+.aircraft-svg {
+  width: min(100%, 680px);
+  height: 430px;
+
+  overflow: visible;
+}
+
+.centerline {
+  stroke: #d8d8d3;
+  stroke-width: 1;
+  stroke-dasharray: 4 5;
+}
+
+.fuselage {
+  fill: #252529;
+}
+
+.main-wing {
+  fill: #303035;
+}
+
+.tail {
+  fill: #5c5c62;
+}
+
+.vertical-tail {
+  fill: #444449;
+}
+
+.cg-point {
+  fill: #f0a32f;
+
+  stroke: white;
+  stroke-width: 3;
+}
+
+
+/* ============================================================
+   AIRCRAFT DIMENSIONS
+   ============================================================ */
+
+.aircraft-dimensions {
+  position: absolute;
+
+  bottom: 12px;
+
+  display: flex;
+  gap: 35px;
+
+  color: #777772;
+
+  font-size: 10px;
+}
+
+.aircraft-dimensions div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.aircraft-dimensions strong {
+  color: #333337;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================
+   LEGEND
+   ============================================================ */
+
+.aircraft-caption {
+  display: flex;
+  gap: 18px;
+
+  margin-top: 5px;
+
+  font-size: 10px;
+  color: #85857f;
+}
+
+.aircraft-caption div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+}
+
+.wing-dot {
+  background: #303035;
+}
+
+.tail-dot {
+  background: #5c5c62;
+}
+
+.cg-dot {
+  background: #f0a32f;
+}
+
+
+/* ============================================================
+   RESULTS
+   ============================================================ */
+
+.results-panel {
+  padding: 28px 22px;
+
+  background: #ffffff;
+
+  border-left: 1px solid #deded9;
+
+  overflow-y: auto;
+}
+
+.result-section {
+  padding-bottom: 22px;
+  margin-bottom: 22px;
+
+  border-bottom: 1px solid #e4e4df;
+}
+
+.result-section:last-child {
+  border-bottom: none;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 15px;
+}
+
+.section-header h2 {
+  margin: 3px 0 0;
+
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.status {
+  padding: 5px 7px;
+
+  border-radius: 4px;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.status.feasible {
+  color: #27733a;
+  background: #edf7ef;
+}
+
+.status.infeasible {
+  color: #a42f2a;
+  background: #fbeeed;
+}
+
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+
+.empty-state {
+  margin-top: 17px;
+
+  padding: 14px;
+
+  border: 1px dashed #d7d7d2;
+  border-radius: 6px;
+
+  color: #999994;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   ALL GOOD
+   ============================================================ */
+
+.all-good {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 16px;
+
+  padding: 12px;
+
+  border-radius: 6px;
+
+  background: #f3f9f3;
+}
+
+.check {
+  width: 23px;
+  height: 23px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #dcefdc;
+
+  color: #27733a;
+
+  font-weight: 700;
+}
+
+.all-good strong,
+.all-good span:last-child {
+  display: block;
+}
+
+.all-good strong {
+  font-size: 11px;
+}
+
+.all-good span:last-child {
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  color: #7c887e;
+}
+
+
+/* ============================================================
+   VIOLATIONS
+   ============================================================ */
+
+.violations {
+  margin-top: 14px;
+}
+
+.violation-count {
+  margin-bottom: 8px;
+
+  color: #a42f2a;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.violation {
+  margin-bottom: 7px;
+
+  padding: 10px 11px;
+
+  border-left: 2px solid #c9534d;
+
+  background: #fdf8f7;
+
+  border-radius: 0 5px 5px 0;
+}
+
+.violation-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.warning {
+  width: 16px;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f4d9d6;
+  color: #a42f2a;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.violation-heading strong {
+  font-size: 11px;
+}
+
+.violation p {
+  margin: 5px 0 7px 23px;
+
+  color: #85807e;
+
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.violation-number {
+  display: flex;
+  justify-content: space-between;
+
+  margin-left: 23px;
+
+  font-family: monospace;
+  font-size: 9px;
+
+  color: #99918f;
+}
+
+.violation-number strong {
+  color: #a42f2a;
+}
+
+
+/* ============================================================
+   METRICS
+   ============================================================ */
+
+.metrics {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 1px;
+
+  margin-top: 12px;
+
+  background: #e4e4df;
+
+  border: 1px solid #e4e4df;
+}
+
+.metric {
+  padding: 10px;
+
+  background: white;
+}
+
+.metric-label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #999994;
+
+  font-size: 9px;
+}
+
+.metric-value {
+  font-size: 13px;
+  font-weight: 600;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-value small {
+  color: #999994;
+
+  font-size: 9px;
+  font-weight: 400;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1200px) {
+
+  body {
+    min-width: 0;
+  }
+
+  .layout {
+    grid-template-columns:
+      220px
+      minmax(400px, 1fr)
+      300px;
+  }
+
+}
+
+@media (max-width: 950px) {
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .controls-panel,
+  .results-panel {
+    border: none;
+  }
+
+  .aircraft-panel {
+    min-height: 550px;
+  }
+
+}

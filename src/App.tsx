@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 
-const API_URL = "https://nmt-sdt0.onrender.com";
-
 type Violation = {
   name: string;
   type: string;
@@ -327,57 +325,23 @@ function App() {
   // OPTIMIZE
   // ==========================================================
 
-  async function optimize() {
+  import { lookupAircraft } from "./lookupTable";
 
+  async function optimize() {
     setLoading(true);
     setError(null);
 
     try {
-
-      const response = await fetch(
-        `${API_URL}/aircraft`,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            S,
-            AR,
-            margin,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-
-        const message =
-          await response.text();
-
-        throw new Error(
-          `Backend error ${response.status}: ${message}`
-        );
-      }
-
-      const data =
-        await response.json();
-
+      const data = lookupAircraft(S, AR, margin);
       setResult(data);
-
     } catch (err) {
-
       setError(
         err instanceof Error
           ? err.message
-          : "Unable to connect to optimizer."
+          : "Unable to compute result."
       );
-
     } finally {
-
       setLoading(false);
-
     }
   }
 

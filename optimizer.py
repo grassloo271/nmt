@@ -1268,7 +1268,7 @@ def optimize_aircraft(
 
         sol = opti.solve(
             behavior_on_failure="return_last",
-            max_iter=10000,
+            max_iter=50,
         )
 
         stats = sol.stats()

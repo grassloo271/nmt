@@ -1210,7 +1210,7 @@ def optimize_aircraft(
     )
 
 
-    Omega = np.sqrt(
+    Omega = ca.sqrt(
         Tmax_static
         / (
             0.5

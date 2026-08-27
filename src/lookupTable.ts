@@ -12,7 +12,7 @@
  * static assets) and adjust the import path below.
  */
 
-import lookupData from "./lookup_table.json";
+import lookupData from "./lookup_table_wmass.json";
 
 // ============================================================
 // TYPES

@@ -82,6 +82,7 @@ def trim_result(result: dict) -> dict:
         "stability": result.get("stability"),
         "locations": result.get("locations"),
         "structural": result.get("structural"),
+        "mass":result.get("mass"),
     }
 
 
@@ -141,7 +142,7 @@ def main():
         "results": table,
     }
 
-    with open("lookup_table.json", "w") as f:
+    with open("lookup_table_wmass.json", "w") as f:
         json.dump(output, f)
 
     print(f"\nDone. Wrote lookup_table.json ({len(table)} entries, {failures} failures).")

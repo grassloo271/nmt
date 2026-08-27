@@ -84,6 +84,18 @@ type AircraftResult = {
     motor: number;
   };
 
+  mass?: {
+    wing: number;
+    horizontal_tail: number;
+    vertical_tail: number;
+    boom: number;
+    battery: number;
+    motor: number;
+    radio: number;
+    servos: number;
+    margin: number;
+  };
+
   structural?: {
     main_wing_deflection: number;
     main_wing_deflection_limit: number;
@@ -304,6 +316,47 @@ function Metric({
 
 
 // ============================================================
+// BUILD SPEC HELPERS
+// ============================================================
+
+function totalMass(mass: AircraftResult["mass"]) {
+  if (!mass) return undefined;
+
+  return (
+    mass.wing +
+    mass.horizontal_tail +
+    mass.vertical_tail +
+    mass.boom +
+    mass.battery +
+    mass.motor +
+    mass.radio +
+    mass.servos +
+    mass.margin
+  );
+}
+
+function SpecRow({
+  label,
+  value,
+  unit,
+}: {
+  label: string;
+  value: number | undefined;
+  unit?: string;
+}) {
+  return (
+    <div className="spec-row">
+      <span>{label}</span>
+      <strong>
+        {fmt(value)}
+        {unit && <small> {unit}</small>}
+      </strong>
+    </div>
+  );
+}
+
+
+// ============================================================
 // APP
 // ============================================================
 
@@ -327,8 +380,9 @@ function App() {
   // OPTIMIZE
   // ==========================================================
 
+  
  
-  async function optimize() {
+ async function optimize() {
     setLoading(true);
     setError(null);
 
@@ -816,6 +870,273 @@ function App() {
         </aside>
 
       </main>
+
+
+      {/* ======================================================
+          BUILD SPEC ADDENDUM
+
+          Everything needed to physically assemble the aircraft:
+          where each component sits, its dimensions, and its
+          mass.
+      ====================================================== */}
+
+      {result && result.success && (
+
+        <section className="build-specs">
+
+          <div className="section-label">
+            BUILD SPECIFICATIONS
+          </div>
+
+          <h2>Physical Assembly Reference</h2>
+
+          <div className="build-specs-grid">
+
+            {/* ================================================
+                COMPONENT LOCATIONS & DIMENSIONS
+            ================================================ */}
+
+            <div className="spec-card">
+
+              <h3>Main Wing</h3>
+
+              <SpecRow
+                label="Position (from nose)"
+                value={0}
+                unit="m"
+              />
+              <SpecRow
+                label="Span (full)"
+                value={result.wing?.span}
+                unit="m"
+              />
+              <SpecRow
+                label="Chord"
+                value={result.wing?.chord}
+                unit="m"
+              />
+              <SpecRow
+                label="Area"
+                value={result.wing?.S}
+                unit="m²"
+              />
+              <SpecRow
+                label="Aspect ratio"
+                value={result.wing?.AR}
+              />
+              <SpecRow
+                label="Dihedral"
+                value={result.wing?.dihedral}
+                unit="deg"
+              />
+
+            </div>
+
+            <div className="spec-card">
+
+              <h3>Horizontal Tail</h3>
+
+              <SpecRow
+                label="Position (from wing LE)"
+                value={result.horizontal_tail?.x}
+                unit="m"
+              />
+              <SpecRow
+                label="Span (full)"
+                value={result.horizontal_tail?.span}
+                unit="m"
+              />
+              <SpecRow
+                label="Chord"
+                value={result.horizontal_tail?.chord}
+                unit="m"
+              />
+              <SpecRow
+                label="Area"
+                value={result.horizontal_tail?.S}
+                unit="m²"
+              />
+              <SpecRow
+                label="Aspect ratio"
+                value={result.horizontal_tail?.AR}
+              />
+
+            </div>
+
+            <div className="spec-card">
+
+              <h3>Vertical Tail</h3>
+
+              <SpecRow
+                label="Position (from wing LE)"
+                value={result.vertical_tail?.x}
+                unit="m"
+              />
+              <SpecRow
+                label="Span"
+                value={result.vertical_tail?.span}
+                unit="m"
+              />
+              <SpecRow
+                label="Chord"
+                value={result.vertical_tail?.chord}
+                unit="m"
+              />
+              <SpecRow
+                label="Area"
+                value={result.vertical_tail?.S}
+                unit="m²"
+              />
+              <SpecRow
+                label="Aspect ratio"
+                value={result.vertical_tail?.AR}
+              />
+
+            </div>
+
+            <div className="spec-card">
+
+              <h3>Component Placement</h3>
+
+              <SpecRow
+                label="Battery position"
+                value={result.locations?.battery}
+                unit="m from nose"
+              />
+              <SpecRow
+                label="Motor position"
+                value={result.locations?.motor}
+                unit="m from nose"
+              />
+              <SpecRow
+                label="Center of mass (COM)"
+                value={result.stability?.COM}
+                unit="m from nose"
+              />
+              <SpecRow
+                label="Neutral point"
+                value={result.stability?.neutral_point}
+                unit="m from nose"
+              />
+              <SpecRow
+                label="Static margin"
+                value={result.stability?.static_margin}
+              />
+
+            </div>
+
+
+            {/* ================================================
+                MASS BREAKDOWN
+            ================================================ */}
+
+            <div className="spec-card">
+
+              <h3>Mass Breakdown</h3>
+
+              <SpecRow
+                label="Main wing"
+                value={result.mass?.wing}
+                unit="kg"
+              />
+              <SpecRow
+                label="Horizontal tail"
+                value={result.mass?.horizontal_tail}
+                unit="kg"
+              />
+              <SpecRow
+                label="Vertical tail"
+                value={result.mass?.vertical_tail}
+                unit="kg"
+              />
+              <SpecRow
+                label="Boom"
+                value={result.mass?.boom}
+                unit="kg"
+              />
+              <SpecRow
+                label="Battery"
+                value={result.mass?.battery}
+                unit="kg"
+              />
+              <SpecRow
+                label="Motor"
+                value={result.mass?.motor}
+                unit="kg"
+              />
+              <SpecRow
+                label="Radio"
+                value={result.mass?.radio}
+                unit="kg"
+              />
+              <SpecRow
+                label="Servos"
+                value={result.mass?.servos}
+                unit="kg"
+              />
+              <SpecRow
+                label="Extra margin"
+                value={result.mass?.margin}
+                unit="kg"
+              />
+
+              <div className="spec-row spec-total">
+                <span>Total mass</span>
+                <strong>
+                  {fmt(totalMass(result.mass))}
+                  <small> kg</small>
+                </strong>
+              </div>
+
+            </div>
+
+
+            {/* ================================================
+                STRUCTURAL LIMITS
+            ================================================ */}
+
+            <div className="spec-card">
+
+              <h3>Structural Deflection</h3>
+
+              <SpecRow
+                label="Main wing deflection"
+                value={result.structural?.main_wing_deflection}
+                unit="m"
+              />
+              <SpecRow
+                label="Main wing deflection limit"
+                value={result.structural?.main_wing_deflection_limit}
+                unit="m"
+              />
+              <SpecRow
+                label="Tail deflection"
+                value={result.structural?.horizontal_tail_deflection}
+                unit="m"
+              />
+              <SpecRow
+                label="Tail deflection limit"
+                value={result.structural?.horizontal_tail_deflection_limit}
+                unit="m"
+              />
+              <SpecRow
+                label="Boom twist"
+                value={result.structural?.boom_twist}
+                unit="rad"
+              />
+              <SpecRow
+                label="Boom twist limit"
+                value={result.structural?.boom_twist_limit}
+                unit="rad"
+              />
+
+            </div>
+
+          </div>
+
+        </section>
+
+      )}
 
     </div>
   );

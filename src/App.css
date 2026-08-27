@@ -719,6 +719,111 @@ input[type="range"]::-moz-range-thumb {
    RESPONSIVE
    ============================================================ */
 
+/* ============================================================
+   BUILD SPEC ADDENDUM
+   ============================================================ */
+
+.build-specs {
+  padding: 32px 34px 60px;
+
+  background: #f4f4f1;
+
+  border-top: 1px solid #deded9;
+}
+
+.build-specs h2 {
+  margin: 3px 0 22px;
+
+  font-size: 21px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.build-specs-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.spec-card {
+  padding: 18px 19px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4e4df;
+  border-radius: 8px;
+}
+
+.spec-card h3 {
+  margin: 0 0 12px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+
+  color: #444449;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  padding: 7px 0;
+
+  border-bottom: 1px solid #eeeeeb;
+
+  font-size: 11px;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.spec-row span {
+  color: #8a8a85;
+}
+
+.spec-row strong {
+  font-weight: 600;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.spec-row strong small {
+  margin-left: 2px;
+
+  font-weight: 400;
+  color: #999994;
+
+  font-size: 10px;
+}
+
+.spec-total {
+  margin-top: 4px;
+  padding-top: 11px;
+
+  border-top: 1px solid #d7d7d2;
+}
+
+.spec-total span,
+.spec-total strong {
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #18181b;
+}
+
+@media (max-width: 950px) {
+
+  .build-specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
 @media (max-width: 1200px) {
 
   body {

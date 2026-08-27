@@ -4,7 +4,7 @@ from pathlib import Path
 import aerosandbox as asb
 import aerosandbox.numpy as np
 import casadi as ca
-import pandas as pd
+import numpy as np_std
 
 from wing_deflection import max_deflection
 
@@ -22,13 +22,11 @@ POLAR_FILE = BACKEND_DIR / "naca2412_polar.csv"
 # AIRFOIL POLARS
 # ============================================================
 
-aero_df = pd.read_csv(POLAR_FILE)
-
-alpha_array = aero_df["alpha"].to_numpy()
-cl_array = aero_df["CL"].to_numpy()
-cd_array = aero_df["CD"].to_numpy()
-cm_array = aero_df["CM"].to_numpy()
-
+data = np_std.genfromtxt(POLAR_FILE, delimiter=",", names=True)
+alpha_array = data["alpha"]
+cl_array = data["CL"]
+cd_array = data["CD"]
+cm_array = data["CM"]
 
 CL_func = ca.interpolant(
     "CL_func",
@@ -1265,10 +1263,14 @@ def optimize_aircraft(
     solve_error = None
 
     try:
-
         sol = opti.solve(
             behavior_on_failure="return_last",
             max_iter=50,
+            options={
+                "ipopt.hessian_approximation": "limited-memory",
+                "ipopt.print_level": 0,
+                "print_time": False,
+            },
         )
 
         stats = sol.stats()

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
-const API_URL = "https://nmt-sdt0.onrender.com/";
+const API_URL = "https://nmt-sdt0.onrender.com";
 
 type Violation = {
   name: string;

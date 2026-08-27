@@ -19,7 +19,7 @@ app.add_middleware(
         "http://localhost:5174",
         "http://localhost:5175",
         "http://localhost:5176",
-        "https://nmt-sdt0.onrender.com/",
+        "https://nmt-sdt0.onrender.com",
         "https://nmt-1-4vru.onrender.com",
     ],
     allow_credentials=True,

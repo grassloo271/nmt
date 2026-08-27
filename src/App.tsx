@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./App.css";
+import { lookupAircraft } from "./lookupTable";
+
 
 type Violation = {
   name: string;
@@ -325,8 +327,7 @@ function App() {
   // OPTIMIZE
   // ==========================================================
 
-  import { lookupAircraft } from "./lookupTable";
-
+ 
   async function optimize() {
     setLoading(true);
     setError(null);
